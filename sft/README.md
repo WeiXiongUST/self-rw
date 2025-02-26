@@ -5,8 +5,7 @@ conda create -n sft python=3.10.9
 conda activate sft
 
 ## Get axolotl for general model, we use 0.6.0 in our experiments
-mkdir qwen_sft
-cd qwen_sft
+
 git clone https://github.com/OpenAccess-AI-Collective/axolotl
 cd axolotl
 pip install -e .
@@ -44,5 +43,5 @@ huggingface-cli login
 You can update the home dir and run the following command to fine-tuning your model:
 
 ```sh
-torchrun --nproc_per_node 8 --master_port 20001 -m axolotl.cli.train qwen.yaml --deepspeed YOUR_HOME_DIR/qwen_sft/axolotl/deepspeed_configs/zero3_bf16.json
+torchrun --nproc_per_node 8 --master_port 20001 -m axolotl.cli.train qwen.yaml --deepspeed YOUR_HOME_DIR/axolotl/deepspeed_configs/zero3_bf16.json
 ```
