@@ -7,7 +7,7 @@ strict: false
 
 chat_template: qwen_25
 datasets:
-  - path: RLHFlow/self_rewarding_ift
+  - path: RLHFlow/self_rewarding_ift_example
     type: chat_template
     field_messages: conversations
     message_field_role: role
