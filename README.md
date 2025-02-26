@@ -37,7 +37,14 @@ Inspired by the success of Deepseek-R1-Zero and several replications of PPO trai
 |    |  **Self-rewarding IFT + DPO** | 37.6 | 40.1|  2.5 |   3.5 | 1.0  | 
 |    |  **Self-rewarding IFT + PPO** | 41.0| **43.4**  |  2.4  |   2.8 | 0.4   | 
 |  -  |  - | -| -  |  -  |   - | -  | 
-
+|    |  Base | 9.9 | 9.9 |  -  |    -  | -     | - |
+|    |  Prompt with Gold RM| 9.9 | 11.7  |  1.8  |    1.8  | 0.0    | 
+|    |  Intrinsic Self-correction | 9.9 | 8.4 |  -1.5  |   1.8  | 3.3   | 
+|  Minerva Math  |  STaR/RAFT | 28.7 | 29.4  |  0.7 |   1.1  | 1.1     | 
+|    |  STaR/RAFT+ | 25.7| 25.3  |  -0.4  |    0.8 | 1.2     | 
+|    |  **Self-rewarding IFT** | 23.2 | 28.7  |  5.5 |   7.3 | 1.8 | 
+|    |  **Self-rewarding IFT + DPO** | 26.8 | 34.6| **7.8**|   9.6 | 1.8  | 
+|    |  **Self-rewarding IFT + PPO** | 34.0| **38.4**  |  4.4  |   5.1 | 0.7   | 
 
 
 </div>
