@@ -1,4 +1,4 @@
-# Online-DPO-R1: Unlocking Effective Reasoning Without the PPO Overhead
+# Self-rewarding Correction for Mathematical Reasoning
 
 <div align="center">
   <a href="https://efficient-unicorn-451.notion.site/Online-DPO-R1-Unlocking-Effective-Reasoning-Without-the-PPO-Overhead-1908b9a70e7b80c3bc83f4cf04b2f175">
