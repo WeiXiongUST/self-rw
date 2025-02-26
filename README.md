@@ -49,7 +49,7 @@ We provide an example of the self-rewarding reasoning path.
 
 We provide an example of the sequential rejection sampling process:
 
-<img src="./figs/seq_rs.png" alt="seq_rs" style="zoom: 10%;" />
+<img src="./figs/seq_rs2.png" alt="seq_rs2" style="zoom: 10%;" />
 
 ## Getting Started
 We provide the guideline for the (1) SFT training, (2) DPO training, (3) PPO training, and (4) Evaluation to build the self-rewarding reasoning LLMs. Please refer to the different parts for detailed instructions.
