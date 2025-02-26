@@ -12,15 +12,19 @@ pip install transformers==4.45.0
 ```
 
 ### Evaluation
-You can evaluate Qwen2.5/Qwen2-Math-Instruct series model with the following command:
+You can evaluate Qwen/Qwen2.5-Math-7B by running 
+```bash
+bash test_model.sh
+```
+where we have prepared the script with the following content:
 ```bash
 # Qwen2.5-Math-Instruct Series
 PROMPT_TYPE="qwen25-math-cot"
 
 # Qwen2.5-Math-1.5B-Instruct
 export CUDA_VISIBLE_DEVICES=0
-MODEL_NAME_OR_PATH="Qwen/Qwen2.5-Math-1.5B-Instruct"
-OUTPUT_DIR="Qwen2.5-Math-1.5B-Instruct-Math-Eval"
+MODEL_NAME_OR_PATH="Qwen/Qwen2.5-Math-7B"
+OUTPUT_DIR="Qwen/Qwen2.5-Math-7B-Eval"
 bash sh/eval.sh $PROMPT_TYPE $MODEL_NAME_OR_PATH $OUTPUT_DIR
 ```
 
