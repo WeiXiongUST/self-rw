@@ -1,6 +1,6 @@
 # PPO Training
 
-We implement the PPO training by veRL package and we provide the script here. Please follow [veRL's document](https://verl.readthedocs.io/en/latest/start/install.html) to set up the training environment. 
+We implement the PPO training by veRL package and we provide the script here. Please follow [veRL's document](https://verl.readthedocs.io/en/latest/start/install.html) to set up the training environment. However, please ensure that we install sympy==1.12.
 
 ## Data prepration of the numia prompt set
 
