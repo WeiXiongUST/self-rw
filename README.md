@@ -9,9 +9,6 @@
 </div>
 
 
-
-
-
 ## Introduction
 
 
@@ -40,16 +37,22 @@ We study self-rewarding reasoning large language models (LLMs), which can simult
 
 We particularly focus on the representative task of self-correction, where models autonomously detect errors in their responses, revise outputs, and decide when to terminate iterative refinement loops. To enable this, we propose a two-staged algorithmic framework for constructing self-rewarding reasoning models using only self-generated data. In the first stage, we employ sequential rejection sampling to synthesize long chain-of-thought trajectories that incorporate both self-rewarding and self-correction mechanisms. Fine-tuning models on these curated data allows them to learn the patterns of self-rewarding and self-correction. In the second stage, we further enhance the models' ability to assess response accuracy and refine outputs through *reinforcement learning* with rule-based signals. Experiments with Llama-3 and Qwen-2.5 demonstrate that our approach surpasses intrinsic self-correction capabilities and achieves performance comparable to systems that rely on external reward models.
 
-Our key findings:
-* DPO and RAFT significantly improve model performance while remaining efficient and easy to implement.
-* Iterative DPO does NOT benefit from the additional Negative Log-Likelihood (NLL) loss.
-* DPO with SFT warm-up contributes to the training and improves performance.
-* Compared to the PPO algorithm (51.8%), DPO/RAFT achieves an inferior performance, showing that PPO is still one of the most effective RL algorithms in this context.
-* SFT Warm-Up before DPO could improve the model performance (51.8%) and be competent with Qwen-PPO-R1-Zero.
+We provide an example of the self-rewarding reasoning path.
+
+<img src="./figs/self_rewarding_reasoning_path.png" alt="self_rewarding_reasoning_path" style="zoom: 10%;" />
+
+
+## Two-stage Training Framework
+
+1. **Data collection by sequential rejection sampling.** We employ a rejection sampling approach, where we sequentially prompt the base model and generate different steps separately. Then, we combine them into long CoT trajectories that incorporate both self-rewarding and self-correction patterns. We generate a large amount of self-correction trajectories and only preserve the desired trajectories.
+2. **Reinforcement learning (RL) optimization.** We initialize from stage 1 and further refine the policy using RL (PPO or iterative DPO), mainly using the correctness score as the reward signal (referred to as the rule-based reward).
+
+We provide an example of the sequential rejection sampling process:
+
+<img src="./figs/seq_rs.png" alt="seq_rs" style="zoom: 10%;" />
 
 ## Getting Started
 We provide the guideline for the (1) SFT training, (2) DPO training, (3) PPO training, and (4) Evaluation to build the self-rewarding reasoning LLMs. Please refer to the different parts for detailed instructions.
-
 
 
 ## Citation
