@@ -9,15 +9,13 @@
 </div>
 
 
-This is the repository for running the Iterative DPO with rule-based rewards. In every iteration, we sample responses from the model and label the rewards using the rule-based method. We then construct the preference pair based on the reward scores for DPO training. In our code, we perform iterative DPO starting with Qwen2.5-MATH-7B with prompts from Numina-Math. After the DPO training, our model achieves 26.7% on AIME24, 76.8% on MATH500, 62.5% on AME, 30.5% on Minerva-Math, and 37.9% on OlympiadBench, surpassing Llama-3.1-70B-Instruct and nearly on par with Eurus-2-7B-PRIME which adopts SFT and PPO training.
+
+
 
 ## Introduction
 
-Inspired by the success of Deepseek-R1-Zero and several replications of PPO training which achieve superior performance on mathematical reasoning and demonstrate the “Aha moment” during RL training, we are curious about alternative algorithms in RL in this scenario. In this project, we implement rule-based RL from Qwen2.5-MATH-7B-base using iterative DPO and rejection sampling (RAFT), which are efficient and easy to implement. We train the models using the prompt set from the MATH training set and Numina-Math, and evaluate the models on AIME24, AMC23, MATH500, Minerva Math, and OlympiadBench. After several iterations, our models achieve an overall accuracy of 50.0% for DPO after SFT warm-up, 47.0% for DPO starting from the Base Model, and 44.4% for RAFT, compared to 33.9% for the Base Model. We list the result as follows:
 
-<div align="center">
-
-| Benchmark | Method | Turn 1 | Final Accuracy | Improvement | w2c | c2w|  
+| Benchmark | Method | Turn 1 | Final Accuracy | Improvement | w2c | c2w |  
 |:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
 |    |  Base | 65.4 | 65.4  |  -  |    -  | -     | - |
 |    |  Prompt with Gold RM| 65.4 | 66.8  |  1.4  |    1.4  | 0.0    | 
@@ -27,15 +25,6 @@ Inspired by the success of Deepseek-R1-Zero and several replications of PPO trai
 |    |  **Self-rewarding IFT** | 72.6 | 77.2  |  4.6  |   5.0 | 0.4 | 
 |    |  **Self-rewarding IFT + DPO** | 72.8 | 78.6|  **5.8** |   6.0 | 0.2  | 
 |    |  **Self-rewarding IFT + PPO** | 75.8| **80.2**  |  4.4  |   4.8 | 0.4   | 
-|  -  |  - | -| -  |  -  |   - | -  | 
-|    |  Base | 23.4 | 23.4  |  -  |    -  | -     | - |
-|    |  Prompt with Gold RM| 23.4 | 25.6  |  2.2  |    2.2  | 0.0    | 
-|    |  Intrinsic Self-correction | 23.4 | 18.1 |  -5.3  |    2.2  | 7.5   | 
-|  OlympiadBench  |  STaR/RAFT | 36.5 | 32.5  |  -4.0  |    7.2  | 11.2     | 
-|    |  STaR/RAFT+ | 35.7 | 35.5  |  -0.2  |    3.2  | 3.4     | 
-|    |  **Self-rewarding IFT** | 35.4 | 39.4  |  **4.0**  |   4.7 | 0.7 | 
-|    |  **Self-rewarding IFT + DPO** | 37.6 | 40.1|  2.5 |   3.5 | 1.0  | 
-|    |  **Self-rewarding IFT + PPO** | 41.0| **43.4**  |  2.4  |   2.8 | 0.4   | 
 |  -  |  - | -| -  |  -  |   - | -  | 
 |    |  Base | 9.9 | 9.9 |  -  |    -  | -     | - |
 |    |  Prompt with Gold RM| 9.9 | 11.7  |  1.8  |    1.8  | 0.0    | 
@@ -47,7 +36,9 @@ Inspired by the success of Deepseek-R1-Zero and several replications of PPO trai
 |    |  **Self-rewarding IFT + PPO** | 34.0| **38.4**  |  4.4  |   5.1 | 0.7   | 
 
 
-</div>
+We study self-rewarding reasoning large language models (LLMs), which can simultaneously generate step-by-step reasoning and evaluate the correctness of their outputs during the inference time-**without external feedback**. This integrated approach allows a single model to independently guide its reasoning process, offering computational advantages for model deployment.
+
+We particularly focus on the representative task of self-correction, where models autonomously detect errors in their responses, revise outputs, and decide when to terminate iterative refinement loops. To enable this, we propose a two-staged algorithmic framework for constructing self-rewarding reasoning models using only self-generated data. In the first stage, we employ sequential rejection sampling to synthesize long chain-of-thought trajectories that incorporate both self-rewarding and self-correction mechanisms. Fine-tuning models on these curated data allows them to learn the patterns of self-rewarding and self-correction. In the second stage, we further enhance the models' ability to assess response accuracy and refine outputs through *reinforcement learning* with rule-based signals. Experiments with Llama-3 and Qwen-2.5 demonstrate that our approach surpasses intrinsic self-correction capabilities and achieves performance comparable to systems that rely on external reward models.
 
 Our key findings:
 * DPO and RAFT significantly improve model performance while remaining efficient and easy to implement.
@@ -56,9 +47,8 @@ Our key findings:
 * Compared to the PPO algorithm (51.8%), DPO/RAFT achieves an inferior performance, showing that PPO is still one of the most effective RL algorithms in this context.
 * SFT Warm-Up before DPO could improve the model performance (51.8%) and be competent with Qwen-PPO-R1-Zero.
 
-## Training and Evaluation
-
-Please refer to the different parts for detailed instructions.
+## Getting Started
+We provide the guideline for the (1) SFT training, (2) DPO training, (3) PPO training, and (4) Evaluation to build the self-rewarding reasoning LLMs. Please refer to the different parts for detailed instructions.
 
 
 
