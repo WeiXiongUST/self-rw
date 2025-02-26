@@ -1,13 +1,7 @@
 # Self-rewarding Correction for Mathematical Reasoning
-
-<div align="center">
-  <a href="https://efficient-unicorn-451.notion.site/Online-DPO-R1-Unlocking-Effective-Reasoning-Without-the-PPO-Overhead-1908b9a70e7b80c3bc83f4cf04b2f175">
-    <img src="https://www.notion.so/front-static/favicon.ico" alt="Notion Icon">
-  </a>
-  <br>
-  <a href="https://efficient-unicorn-451.notion.site/Online-DPO-R1-Unlocking-Effective-Reasoning-Without-the-PPO-Overhead-1908b9a70e7b80c3bc83f4cf04b2f175">Notion Page</a>
-</div>
-
+<p align="center">
+TL;DL: this is the repo for "<a href="https://github.com/RLHFlow/Self-rewarding-reasoning-LLM" target="_blank">Self-rewarding Correction for Mathematical Reasoning</a>"
+</p>
 
 ## Introduction
 
@@ -52,7 +46,17 @@ We provide an example of the sequential rejection sampling process:
 <img src="./figs/seq_rs2.png" alt="seq_rs2" style="zoom: 10%;" />
 
 ## Getting Started
-We provide the guideline for the (1) SFT training, (2) DPO training, (3) PPO training, and (4) Evaluation to build the self-rewarding reasoning LLMs. Please refer to the different parts for detailed instructions.
+
+The main pipeline is divided into three steps:
+
+
+- [`SFT`](./sft/) to train the SFT model.
+- [`dpo_training`](./dpo_training/) to conduct the (multi-turn) DPO training.
+- [`ppo_training`](./ppo_training/) to conduct PPO training.
+- [`eval_math`](./eval_math/) to evaluate the LLMs' self-correction capacity.
+
+
+Please refer to the different parts for detailed instructions.
 
 
 ## Citation
@@ -62,5 +66,12 @@ The authors would like to thank the great open-source communities, including the
 If you find our paper or code useful, it would be highly appreciated if you could consider citing our work by:
 
 ```bibtex
-xx
+@misc{xiong2024rlhflowmath,
+      author={Wei Xiong and Hanning Zhang and Chenlu Ye and Lichang Chen and Nan Jiang and Tong Zhang},
+  title = {Self-rewarding Correction for Mathematical Reasoning},
+  year = {2025},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/RLHFlow/Self-rewarding-reasoning-LLM}}
+}
 }
