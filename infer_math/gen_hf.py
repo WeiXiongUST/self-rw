@@ -97,8 +97,10 @@ sampling_params = SamplingParams(
     #stop=["<|user|>"],
 )
 
-
-ds = load_dataset(script_args.dataset_name_or_path, split="train")
+if 'json' in script_args.dataset_name_or_path:
+    ds = load_dataset('json", data_files=script_args.dataset_name_or_path, split="train")
+else:
+    ds = load_dataset(script_args.dataset_name_or_path, split="train")
 
 
 ds = ds.map(
