@@ -42,7 +42,7 @@ if __name__ == '__main__':
             # We set the data_source as MATH so that we can use the reward model designed for MATH dataset
                 
             data = {
-                "data_source": 'DigitalLearningGmbH/MATH-lighteval',
+                "data_source": 'numina_aops_forum',
                 "prompt": [{
                     "role": "user",
                     "content": question
@@ -58,9 +58,22 @@ if __name__ == '__main__':
 
         return process_fn
 
+    from transformers import AutoTokenizer, AutoModelForCausalLM
+    tokenizer = AutoTokenizer.from_pretrained('1231czx/qwen_self_corr_warmup2_clean_ep1')
+    def able_to_extract(example):
+        if len(tokenizer.encode(example['problem'])) > 700:
+            return False
+
+        return True
+        
+    train_dataset = train_dataset.filter(able_to_extract)
+    test_dataset = test_dataset.filter(able_to_extract)
+    
     train_dataset = train_dataset.map(function=make_map_fn('train'), with_indices=True)
     test_dataset = test_dataset.map(function=make_map_fn('test'), with_indices=True)
     print(train_dataset[0])
+
+    
     local_dir = args.local_dir
     hdfs_dir = args.hdfs_dir
     train_dataset.to_parquet(os.path.join(local_dir, 'train.parquet'))
